@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dropdown Test</title>
+    <style>
+      .dropdown-menu {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      }
+
+      .dropdown-menu.show {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dropdown">
+      <button class="dropdown-toggle">Toggle Dropdown</button>
+      <div class="dropdown-menu">
+        <p>Dropdown item 1</p>
+        <p>Dropdown item 2</p>
+        <p>Dropdown item 3</p>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const dropdown = document.querySelector(".dropdown-menu");
+        const toggleButton = document.querySelector(".dropdown-toggle");
+
+        // Function to toggle the dropdown menu
+        const toggleDropdown = (event) => {
+          event.stopPropagation();
+          dropdown.classList.toggle("show");
+        };
+
+        // Function to close the dropdown when clicking outside
+        const closeDropdown = (event) => {
+          if (
+            !dropdown.contains(event.target) &&
+            !toggleButton.contains(event.target)
+          ) {
+            dropdown.classList.remove("show");
+          }
+        };
+
+        // Event listener for both click and touchstart to toggle dropdown
+        toggleButton.addEventListener("click", toggleDropdown);
+        toggleButton.addEventListener("touchstart", toggleDropdown);
+
+        // Event listener to close dropdown when clicking outside
+        document.addEventListener("click", closeDropdown);
+        document.addEventListener("touchstart", closeDropdown);
+      });
+    </script>
+  </body>
+</html>
